@@ -50,7 +50,7 @@ Base.show(io::IO, ::MIME"text/plain", x::FitBias) = print(io, "Fit Bias Fields: 
 # ---------------------------------------------------------------------------- #
 
 """
-    read_dataset(file_location) -> (s, σ)
+    read_data(file_location) -> (s, σ)
 
 Reads a .csv file containing sample data.
 

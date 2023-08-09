@@ -50,40 +50,24 @@ Base.show(io::IO, ::MIME"text/plain", x::FitBias) = print(io, "Fit Bias Fields: 
 # ---------------------------------------------------------------------------- #
 
 """
-    extractunits(s::String; keep_parentheses::Bool = false)::String
+    read_dataset(file_location) -> (s, σ)
 
-Isolate and return the portion of the input `String` inside paratheses,
-usually the units.
-"""
-function extractunits(s::AbstractString; keep_parentheses::Bool=false)::String
-    units = match(r"\(.*\)", s).match
-    if !(keep_parentheses)
-        units = strip(units, ['(',')'])
-    end
-    return units
-end
-
-"""
-    read_fracture_stress(file_location) -> (s, σ, s_units, σ_units)
-
-Reads a .csv file containing normal stress along a path exported from ANSYS.
+Reads a .csv file containing sample data.
 
 # Arguments
-- `file_location::String`: location of the stress file to be read
-- `s::Vector{Float64}`: location data along path from inside to outside of vessel
-- `σ::Vector{Float64}`: normal stress data at `s` points along path
-- `s_units::String`: units of the `s` column in ANSYS data export
-- `σ_units::String`: units of the `σ` column in ANSYS data export
+- `file_location::String`: location of the file to be read
+- `s::Vector{Float64}`: location data along path from inside to outside
+- `σ::Vector{Float64}`: normal stress data at `s` locations along path
+- `s_units::String`: units of the `s` column
+- `σ_units::String`: units of the `σ` column
 """
-function read_fracture_stress(file_location)
+function read_data(file_location)
     df = DataFrame(CSV.File(file_location))
     s_column_name = only(names(df, r"S "))
     σ_column_name = only(names(df, r"Normal Stress "))
     s = df[:, s_column_name]
     σ = df[:, σ_column_name]
-    s_units = extractunits(s_column_name)
-    σ_units = extractunits(σ_column_name)
-    return (s, σ, s_units, σ_units)
+    return (s, σ)
 end
 
 """

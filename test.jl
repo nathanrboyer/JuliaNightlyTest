@@ -2,7 +2,7 @@
 using AlgebraOfGraphics, BenchmarkTools, CairoMakie, CSV, DataFrames, Polynomials, Revise
 
 # Type and Function Definitions
-includet("compute_polys.jl")
+includet("definitions.jl")
 
 # Read Data
 op_file = "OperatingStress.csv"

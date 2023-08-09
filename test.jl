@@ -10,9 +10,9 @@ includet("definitions.jl")
 (x1, y1) = read_data("Dataset1.csv")
 (x2, y2) = read_data("Dataset2.csv")
 
-# Trim Data for Speed
-#   Can add or remove points as necessary for computational load.
-#   `polyfit`` will error and tell you if using too few points.
+# Trim Data for Testing Speed
+#   Can add or remove points from vectors as necessary for computational load.
+#   (Don't use fewer than 14 points or polyfit will error.)
 x1 = x1[1:2:101]
 x2 = x2[1:2:101]
 y1 = y1[1:2:101]

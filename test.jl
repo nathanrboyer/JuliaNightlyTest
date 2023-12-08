@@ -25,7 +25,7 @@ y2 = y2[1:2:101]
 @time result2 = polyfit(x2, y2)
 
 # Compute Polynomails Fits Jointly
-#   This method is unusably slow on 1.10.0-beta1 and August 8th nightly.
+#   This method is unusably slow on 1.10.0-beta1 and August 8th, 2023 nightly.
 #   Function takes roughly 5 minutes on 1.9.2 with full data set.
 #   Function takes more than 1 day on nightly with full data set.
 @time result1, result2 = polyfit([x1, x2], [y1, y2])
@@ -33,3 +33,5 @@ y2 = y2[1:2:101]
 # Plot Results
 plot1 = plotpolyfit(result1; xlabel="x", ylabel="y")
 plot2 = plotpolyfit(result2; xlabel="x", ylabel="y")
+
+# These issues are fixed in Julia version 1.10.0-rc2!
